@@ -1,0 +1,35 @@
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/spa
+server-->browser: HTML document
+note over browser:
+browser parses page
+sees reference to /main.css
+end note
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.css
+server->browser: main.css
+note over browser:
+browser sees reference to /spa.js
+end note
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/spa.js
+server->browser: spa.js
+note over browser:
+executes spa.js
+creates XMLHttpRequest
+creates response listener for the XHR
+sends it
+end note
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/data.json
+note over browser:
+continuing to parse js
+creates sendToServer function
+Adds listener to 'Save' button that,
+when pressed, adds and sends the note.
+end note
+server-->browser: [{ content: "HTML is easy", date: "2019-05-23" }, ...]
+# I hope you don't count the above line for plagiarism,
+# it easily gets hard to express something in the most natural way
+# without that being the same way as in the material.
+note over browser:
+parses JSON
+redraws notes
+end note
+

@@ -1,0 +1,19 @@
+note over browser:
+user enters text and clicks button
+end note
+
+browser->server: HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note
+note right of browser:
+{note: "HTML is easy"}
+end note
+
+server-->browser: 302 Found, redirects browser to /notes
+
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/notes
+
+server-->browser: the /notes page, html
+
+note over browser:
+the browser parses html, GETs css and js, etc
+(this sequence is the same as in the material, no need to copy)
+end note
