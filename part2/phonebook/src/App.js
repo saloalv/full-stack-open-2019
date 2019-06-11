@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Person from './components/Person';
+import FilteredPersonTable from './components/FilteredPersonTable';
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -10,6 +11,8 @@ const App = () => {
   ])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+
+  const [currentFilter, setFilter] = useState('')
 
   const addName = (event) => {
     event.preventDefault()
@@ -26,7 +29,9 @@ const App = () => {
 
   return (
     <div>
-      <h2>Phonebook</h2>
+      <h1>Phonebook</h1>
+      <div>show matching filter: <input value={currentFilter} onChange={event => setFilter(event.target.value)}/></div>
+      <h2>Add a new entry</h2>
       <form onSubmit={addName}>
         <div>
           name: <input value={newName} onChange={event => setNewName(event.target.value)} />
@@ -38,11 +43,7 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      <table>
-        <tbody>
-          {persons.map(({ name, number }) => <Person name={name} number={number} key={name} />)}
-        </tbody>
-      </table>
+      <FilteredPersonTable filter={currentFilter} persons={persons} />
     </div>
   )
 }
