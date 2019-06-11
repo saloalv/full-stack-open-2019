@@ -1,14 +1,41 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
+const getHighestVoteIndex = (scores) => {
+  let highest = scores[0]
+  let highestIndex = 0
+  for (let i = 1; i < scores.length; i++) {
+    if (scores[i] > highest) {
+      highest = scores[i];
+      highestIndex = i;
+    }
+  }
+  return highestIndex;
+}
+
 const App = (props) => {
   const [selected, setSelected] = useState(0)
+  const [scores, setScores] = useState(new Array(anecdotes.length).fill(0))
+  //console.log(scores)
+  const highestVoteIndex = getHighestVoteIndex(scores)
 
   return (
     <div>
-      {props.anecdotes[selected]}
+      <h1>Anecdote of the day</h1>
+      <Anecdote index={selected} votes={scores[selected]} />
+      <button onClick={() => incrementScore(scores, setScores, selected)}>vote</button>
+      <button onClick={() => setSelected(Math.floor(Math.random() * anecdotes.length))}>next anecdote</button>
+      <h1>Anecdote with most votes</h1>
+      <Anecdote index={highestVoteIndex} votes={scores[highestVoteIndex]} />
+      
     </div>
   )
+}
+
+const incrementScore = (get, set, index) => {
+  const newArr = [...get]
+  newArr[index] += 1
+  set(newArr)
 }
 
 const anecdotes = [
@@ -19,6 +46,17 @@ const anecdotes = [
   'Premature optimization is the root of all evil.',
   'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
 ]
+
+const Anecdote = ({index, votes}) => {
+  return (
+    <>
+    {anecdotes[index]} <br/>
+    has {votes} votes <br/>
+    </>
+  )
+}
+
+
 
 ReactDOM.render(
   <App anecdotes={anecdotes} />,
