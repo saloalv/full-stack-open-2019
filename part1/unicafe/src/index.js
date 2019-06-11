@@ -22,8 +22,17 @@ const App = () => {
 
 const Statistics = ({ good, neutral, bad }) => {
 
-    const average = (good - bad) / (good + neutral + bad);
-    const positive = good / (good + neutral + bad);
+    const total = good + neutral + bad
+
+    if (!total) { // <-- abusing JS falsey value
+        return <div>
+            <h1>statistics</h1>
+            No feedback given
+        </div>
+    }
+
+    const average = (good - bad) / (total); // neutral is not used, since it would be adding by 0
+    const positive = good / (total);
 
     return (
         <div>
