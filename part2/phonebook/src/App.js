@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import Person from './components/Person';
 import FilteredPersonTable from './components/FilteredPersonTable';
+import AddPersonForm from './components/AddPersonForm';
+import FilterFragment from './components/FilterFragment';
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -11,7 +12,6 @@ const App = () => {
   ])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
-
   const [currentFilter, setFilter] = useState('')
 
   const addName = (event) => {
@@ -20,28 +20,18 @@ const App = () => {
       alert(`${newName} is already added to the phonebook`)
       return;
     }
-
     const newPerson = [{ name: newName, number: newNumber }]
     setPersons(persons.concat(newPerson))
-
-    console.log(event.target)
   }
 
   return (
     <div>
       <h1>Phonebook</h1>
-      <div>show matching filter: <input value={currentFilter} onChange={event => setFilter(event.target.value)}/></div>
+      <FilterFragment currentFilter={currentFilter} setFilter={setFilter}/>
       <h2>Add a new entry</h2>
-      <form onSubmit={addName}>
-        <div>
-          name: <input value={newName} onChange={event => setNewName(event.target.value)} />
-        </div>
-        <div>
-          number: <input value={newNumber} onChange={event => setNewNumber(event.target.value)} /></div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <AddPersonForm nameGet={newName} nameSet={setNewName}
+        numberGet={newNumber} numberSet={setNewNumber}
+        addName={addName} />
       <h2>Numbers</h2>
       <FilteredPersonTable filter={currentFilter} persons={persons} />
     </div>
