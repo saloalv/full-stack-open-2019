@@ -1,11 +1,12 @@
 import React from 'react'
 import Person from './Person'
 
-const PersonTable = ({persons}) => {
+const PersonTable = ({persons, removePerson}) => {
   return (
     <table>
       <tbody>
-        {persons.map(({ name, number }) => <Person name={name} number={number} key={name} />)}
+        {persons.map(({ name, number, id }) =>
+         <Person name={name} number={number} id={id} removePerson={removePerson} key={name} />)}
       </tbody>
     </table>
   )
