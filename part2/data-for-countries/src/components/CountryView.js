@@ -1,15 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Weather from './Weather'
-import Axios from 'axios';
 
 const CountryView = ({ country }) => {
-    //console.log("countryview", country)
-    //console.log("countryview name", country.name)
-    //console.log("countryview languages", country.languages)
-
-    
-
-
 
     return (
         <div>
