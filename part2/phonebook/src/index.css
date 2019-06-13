@@ -1,0 +1,14 @@
+#top-notification {
+    border-width: 2px;
+    border-style: solid;
+    padding: 2px;
+    width: fit-content;
+}
+
+.error {
+    background-color: red;
+}
+
+.success {
+    background-color: green;
+}
