@@ -1,5 +1,5 @@
 import Axios from 'axios';
-const baseURL = "http://localhost:3001/persons"
+const baseURL = "/api/persons"
 
 const getAll = () => {
     return Axios.get(baseURL).then(response => response.data);
